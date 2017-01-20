@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="demo" content="">
+    <meta name="minhvv" content="">
+
+    <title>Data Observation Demo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <script>
+        function loadPreGen(item) {
+            var fileName = item.id.split('-').pop()
+            $('#data_area').load(`./pregen/${fileName}.htm`)
+        }
+
+    </script>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <!-- <a href="#">Phân tích dữ liệu *098#</a> -->
+                    <a href="#">Data Observation</a>
+                </li>
+
+                <!-- <li class="sidebar-brand fix_title"> Xem theo cắt lớp tiêu dùng </li>
+
+                <li class="sidebar-brand">
+                    <a href="#" id="btn_dk50_hist">Histogram gói DK50</a>
+                </li>
+                <ul id="content_dk50_hist" class="toggled hide_default">
+
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_1' onclick=loadPreGen(this)>Cắt lớp [0, 20K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_2' onclick=loadPreGen(this)>Cắt lớp (20K, 50K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_3' onclick=loadPreGen(this)>Cắt lớp (50K, 100K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_4' onclick=loadPreGen(this)>Cắt lớp (100K, 200K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_5' onclick=loadPreGen(this)>Cắt lớp (200K, 300K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_6' onclick=loadPreGen(this)>Cắt lớp (300K, 500K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_dk50_7' onclick=loadPreGen(this)>Cắt lớp (500K, ~]</a></li>
+                </ul>
+
+                <li class="sidebar-brand">
+                    <a href="#" id="btn_dk50_boxplot">Boxplot gói DK50</a>
+                </li>
+                <ul id="content_dk50_boxplot" class="toggled hide_default">
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_1' onclick=loadPreGen(this)>Cắt lớp [0, 20K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_2' onclick=loadPreGen(this)>Cắt lớp (20K, 50K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_3' onclick=loadPreGen(this)>Cắt lớp (50K, 100K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_4' onclick=loadPreGen(this)>Cắt lớp (100K, 200K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_5' onclick=loadPreGen(this)>Cắt lớp (200K, 300K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_6' onclick=loadPreGen(this)>Cắt lớp (300K, 500K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_dk50_7' onclick=loadPreGen(this)>Cắt lớp (500K, ~]</a></li>
+                </ul>
+
+                <li class="sidebar-brand">
+                    <a href="#" id="btn_v79_hist">Histogram gói V79</a>
+                </li>
+                <ul id="content_v79_hist" class="toggled hide_default">
+
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_1' onclick=loadPreGen(this)>Cắt lớp [0, 20K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_2' onclick=loadPreGen(this)>Cắt lớp (20K, 50K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_3' onclick=loadPreGen(this)>Cắt lớp (50K, 100K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_4' onclick=loadPreGen(this)>Cắt lớp (100K, 200K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_5' onclick=loadPreGen(this)>Cắt lớp (200K, 300K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_6' onclick=loadPreGen(this)>Cắt lớp (300K, 500K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-hist_v79_7' onclick=loadPreGen(this)>Cắt lớp (500K, ~]</a></li>
+                </ul>
+
+                <li class="sidebar-brand">
+                    <a href="#" id="btn_v79_boxplot">Boxplot gói V79</a>
+                </li>
+                <ul id="content_v79_boxplot" class="toggled hide_default">
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_1' onclick=loadPreGen(this)>Cắt lớp [0, 20K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_2' onclick=loadPreGen(this)>Cắt lớp (20K, 50K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_3' onclick=loadPreGen(this)>Cắt lớp (50K, 100K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_4' onclick=loadPreGen(this)>Cắt lớp (100K, 200K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_5' onclick=loadPreGen(this)>Cắt lớp (200K, 300K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_6' onclick=loadPreGen(this)>Cắt lớp (300K, 500K]</a></li>
+                    <li class='sidebar-brand'><a href='#' id='btn-boxplot_v79_7' onclick=loadPreGen(this)>Cắt lớp (500K, ~]</a></li>
+                </ul> -->
+
+                <!-- <li class="sidebar-brand fix_title">Xem theo tên trường</li> -->
+                <li class="sidebar-brand fix_title">View By Category</li>
+
+                <!-- <li class="sidebar-brand">
+                    <a href="#" id="btn_dk50">Gói DK50</a>
+                </li>
+                <ul id="content_dk50" class="toggled hide_default">
+                    <li><a href='#' id='content-dk50-LL_data' textname='Lưu lượng Data' onclick=genPage(this)>Lưu lượng Data</a></li>
+                    <li><a href='#' id='content-dk50-LL_data_mienphi' textname='Lưu lượng Data Miễn phí' onclick=genPage(this)>Lưu lượng Data Miễn phí</a></li>
+                    <li><a href='#' id='content-dk50-LL_thoai_mien_phi' textname='Lưu lượng Thoại Miễn Phí' onclick=genPage(this)>Lưu lượng Thoại Miễn Phí</a></li>
+                    <li><a href='#' id='content-dk50-LL_thoai_ngoai_mang' textname='Lưu lượng Thoại Ngoại Mạng' onclick=genPage(this)>Lưu lượng Thoại Ngoại Mạng</a></li>
+                    <li><a href='#' id='content-dk50-LL_thoai_noi_mang' textname='Lưu lượng Thoại Nội Mạng' onclick=genPage(this)>Lưu lượng Thoại Nội Mạng</a></li>
+                    <li><a href='#' id='content-dk50-LL_thoai_quoc_te' textname='Lưu lượng Thoại Quốc Tế' onclick=genPage(this)>Lưu lượng Thoại Quốc Tế</a></li>
+                    <li><a href='#' id='content-dk50-N_SMS_mien_phi' textname='Số lượng SMS Miễn Phí' onclick=genPage(this)>Số lượng SMS Miễn Phí</a></li>
+                    <li><a href='#' id='content-dk50-N_SMS_ngoai_mang' textname='Số lượng SMS Ngoại Mạng' onclick=genPage(this)>Số lượng SMS Ngoại Mạng</a></li>
+                    <li><a href='#' id='content-dk50-N_SMS_noi_mang' textname='Số lượng SMS Nội Mạng' onclick=genPage(this)>Số lượng SMS Nội Mạng</a></li>
+                    <li><a href='#' id='content-dk50-N_SMS_quoc_te' textname='Số lượng SMS Quốc Tế' onclick=genPage(this)>Số lượng SMS Quốc Tế</a></li>
+                    <li><a href='#' id='content-dk50-So_du_TKGoc' textname='Số dư TK Gốc' onclick=genPage(this)>Số dư TK Gốc</a></li>
+                    <li><a href='#' id='content-dk50-So_du_TKKM' textname='Số dư TK KM' onclick=genPage(this)>Số dư TK KM</a></li>
+                    <li><a href='#' id='content-dk50-So_lan_nap_the' textname='Số lần nạp thẻ' onclick=genPage(this)>Số lần nạp thẻ</a></li>
+                    <li><a href='#' id='content-dk50-So_ngay_PSLL_di' textname='Số ngày Phát Sinh LL Đi' onclick=genPage(this)>Số ngày Phát Sinh LL Đi</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_data' textname='Tiêu dùng Gốc Data' onclick=genPage(this)>Tiêu dùng Gốc Data</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_roaming_sms' textname='Tiêu dùng Gốc Roaming SMS' onclick=genPage(this)>Tiêu dùng Gốc Roaming SMS</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_roaming_thoai' textname='Tiêu dùng Gốc Roaming Thoại' onclick=genPage(this)>Tiêu dùng Gốc Roaming Thoại</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_sms' textname='Tiêu dùng Gốc SMS' onclick=genPage(this)>Tiêu dùng Gốc SMS</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_thoai' textname='Tiêu dùng Gốc Thoại' onclick=genPage(this)>Tiêu dùng Gốc Thoại</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_tong_tieu_dung' textname='Tổng Tiêu dùng Gốc' onclick=genPage(this)>Tổng Tiêu dùng Gốc</a></li>
+                    <li><a href='#' id='content-dk50-TDGoc_vas' textname='Tiêu dùng Gốc VAS' onclick=genPage(this)>Tiêu dùng Gốc VAS</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_data' textname='Tiêu dùng KM Data' onclick=genPage(this)>Tiêu dùng KM Data</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_roaming_sms' textname='Tiêu dùng KM Roaming SMS' onclick=genPage(this)>Tiêu dùng KM Roaming SMS</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_roaming_thoai' textname='Tiêu dùng KM Roaming Thoại' onclick=genPage(this)>Tiêu dùng KM Roaming Thoại</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_sms' textname='Tiêu dùng KM SMS' onclick=genPage(this)>Tiêu dùng KM SMS</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_thoai' textname='Tiêu dùng KM Thoại' onclick=genPage(this)>Tiêu dùng KM Thoại</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_tong_tieu_dung' textname='Tổng Tiêu dùng KM' onclick=genPage(this)>Tổng Tiêu dùng KM</a></li>
+                    <li><a href='#' id='content-dk50-TDKM_vas' textname='Tiêu dùng KM VAS' onclick=genPage(this)>Tiêu dùng KM VAS</a></li>
+                    <li><a href='#' id='content-dk50-Tong_LL_thoai' textname='Tổng Lưu lượng Thoại' onclick=genPage(this)>Tổng Lưu lượng Thoại</a></li>
+                    <li><a href='#' id='content-dk50-Tong_SMS' textname='Tổng Số lượng SMS' onclick=genPage(this)>Tổng Số lượng SMS</a></li>
+                </ul> -->
+
+                <li class="sidebar-brand">
+                    <a href="#" id="btn_v79">Package V79</a>
+                </li>
+                <ul id="content_v79" class="toggled">
+                    <li><a href='#' id='content-v79-Tong_LL_thoai' textname='Tổng Lưu lượng Thoại' onclick=genPage(this)>Tổng Lưu lượng Thoại</a></li>
+                    <li><a href='#' id='content-v79-Tong_SMS' textname='Tổng Số lượng SMS' onclick=genPage(this)>Tổng Số lượng SMS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_sms' textname='Tiêu dùng Gốc SMS' onclick=genPage(this)>Tiêu dùng Gốc SMS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_thoai' textname='Tiêu dùng Gốc Thoại' onclick=genPage(this)>Tiêu dùng Gốc Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_tong_tieu_dung' textname='Tổng Tiêu dùng Gốc' onclick=genPage(this)>Tổng Tiêu dùng Gốc</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_vas' textname='Tiêu dùng Gốc VAS' onclick=genPage(this)>Tiêu dùng Gốc VAS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_data' textname='Tiêu dùng Gốc Data' onclick=genPage(this)>Tiêu dùng Gốc Data</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_roaming_sms' textname='Tiêu dùng Gốc Roaming SMS' onclick=genPage(this)>Tiêu dùng Gốc Roaming SMS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_roaming_thoai' textname='Tiêu dùng Gốc Roaming Thoại' onclick=genPage(this)>Tiêu dùng Gốc Roaming Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDKM_data' textname='Tiêu dùng KM Data' onclick=genPage(this)>Tiêu dùng KM Data</a></li>
+                    <li><a href='#' id='content-v79-TDKM_roaming_sms' textname='Tiêu dùng KM Roaming SMS' onclick=genPage(this)>Tiêu dùng KM Roaming SMS</a></li>
+                    <li><a href='#' id='content-v79-TDKM_roaming_thoai' textname='Tiêu dùng KM Roaming Thoại' onclick=genPage(this)>Tiêu dùng KM Roaming Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDKM_sms' textname='Tiêu dùng KM SMS' onclick=genPage(this)>Tiêu dùng KM SMS</a></li>
+                    <li><a href='#' id='content-v79-TDKM_thoai' textname='Tiêu dùng KM Thoại' onclick=genPage(this)>Tiêu dùng KM Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDKM_tong_tieu_dung' textname='Tổng Tiêu dùng KM' onclick=genPage(this)>Tổng Tiêu dùng KM</a></li>
+                    <li><a href='#' id='content-v79-TDKM_vas' textname='Tiêu dùng KM VAS' onclick=genPage(this)>Tiêu dùng KM VAS</a></li>
+                    <li><a href='#' id='content-v79-LL_data' textname='Lưu lượng Data' onclick=genPage(this)>Lưu lượng Data</a></li>
+                    <li><a href='#' id='content-v79-LL_data_mienphi' textname='Lưu lượng Data Miễn phí' onclick=genPage(this)>Lưu lượng Data Miễn phí</a></li>
+                    <li><a href='#' id='content-v79-LL_thoai_mien_phi' textname='Lưu lượng Thoại Miễn Phí' onclick=genPage(this)>Lưu lượng Thoại Miễn Phí</a></li>
+                    <li><a href='#' id='content-v79-LL_thoai_ngoai_mang' textname='Lưu lượng Thoại Ngoại Mạng' onclick=genPage(this)>Lưu lượng Thoại Ngoại Mạng</a></li>
+                    <li><a href='#' id='content-v79-LL_thoai_noi_mang' textname='Lưu lượng Thoại Nội Mạng' onclick=genPage(this)>Lưu lượng Thoại Nội Mạng</a></li>
+                    <li><a href='#' id='content-v79-LL_thoai_quoc_te' textname='Lưu lượng Thoại Quốc Tế' onclick=genPage(this)>Lưu lượng Thoại Quốc Tế</a></li>
+                    <li><a href='#' id='content-v79-N_SMS_mien_phi' textname='Số lượng SMS Miễn Phí' onclick=genPage(this)>Số lượng SMS Miễn Phí</a></li>
+                    <li><a href='#' id='content-v79-N_SMS_ngoai_mang' textname='Số lượng SMS Ngoại Mạng' onclick=genPage(this)>Số lượng SMS Ngoại Mạng</a></li>
+                    <li><a href='#' id='content-v79-N_SMS_noi_mang' textname='Số lượng SMS Nội Mạng' onclick=genPage(this)>Số lượng SMS Nội Mạng</a></li>
+                    <li><a href='#' id='content-v79-N_SMS_quoc_te' textname='Số lượng SMS Quốc Tế' onclick=genPage(this)>Số lượng SMS Quốc Tế</a></li>
+                    <li><a href='#' id='content-v79-So_du_TKGoc' textname='Số dư TK Gốc' onclick=genPage(this)>Số dư TK Gốc</a></li>
+                    <li><a href='#' id='content-v79-So_du_TKKM' textname='Số dư TK KM' onclick=genPage(this)>Số dư TK KM</a></li>
+                    <li><a href='#' id='content-v79-So_lan_nap_the' textname='Số lần nạp thẻ' onclick=genPage(this)>Số lần nạp thẻ</a></li>
+                    <li><a href='#' id='content-v79-So_ngay_PSLL_di' textname='Số ngày Phát Sinh LL Đi' onclick=genPage(this)>Số ngày Phát Sinh LL Đi</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_data' textname='Tiêu dùng Gốc Data' onclick=genPage(this)>Tiêu dùng Gốc Data</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_roaming_sms' textname='Tiêu dùng Gốc Roaming SMS' onclick=genPage(this)>Tiêu dùng Gốc Roaming SMS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_roaming_thoai' textname='Tiêu dùng Gốc Roaming Thoại' onclick=genPage(this)>Tiêu dùng Gốc Roaming Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_sms' textname='Tiêu dùng Gốc SMS' onclick=genPage(this)>Tiêu dùng Gốc SMS</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_thoai' textname='Tiêu dùng Gốc Thoại' onclick=genPage(this)>Tiêu dùng Gốc Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_tong_tieu_dung' textname='Tổng Tiêu dùng Gốc' onclick=genPage(this)>Tổng Tiêu dùng Gốc</a></li>
+                    <li><a href='#' id='content-v79-TDGoc_vas' textname='Tiêu dùng Gốc VAS' onclick=genPage(this)>Tiêu dùng Gốc VAS</a></li>
+                    <li><a href='#' id='content-v79-TDKM_data' textname='Tiêu dùng KM Data' onclick=genPage(this)>Tiêu dùng KM Data</a></li>
+                    <li><a href='#' id='content-v79-TDKM_roaming_sms' textname='Tiêu dùng KM Roaming SMS' onclick=genPage(this)>Tiêu dùng KM Roaming SMS</a></li>
+                    <li><a href='#' id='content-v79-TDKM_roaming_thoai' textname='Tiêu dùng KM Roaming Thoại' onclick=genPage(this)>Tiêu dùng KM Roaming Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDKM_sms' textname='Tiêu dùng KM SMS' onclick=genPage(this)>Tiêu dùng KM SMS</a></li>
+                    <li><a href='#' id='content-v79-TDKM_thoai' textname='Tiêu dùng KM Thoại' onclick=genPage(this)>Tiêu dùng KM Thoại</a></li>
+                    <li><a href='#' id='content-v79-TDKM_tong_tieu_dung' textname='Tổng Tiêu dùng KM' onclick=genPage(this)>Tổng Tiêu dùng KM</a></li>
+                    <li><a href='#' id='content-v79-TDKM_vas' textname='Tiêu dùng KM VAS' onclick=genPage(this)>Tiêu dùng KM VAS</a></li>
+                    <li><a href='#' id='content-v79-Tong_LL_thoai' textname='Tổng Lưu lượng Thoại' onclick=genPage(this)>Tổng Lưu lượng Thoại</a></li>
+                    <li><a href='#' id='content-v79-Tong_SMS' textname='Tổng Số lượng SMS' onclick=genPage(this)>Tổng Số lượng SMS</a></li>
+                </ul>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12" id="data_area">
+                        <h1>Description</h1>
+                        <p> 
+                            This is a small part of my current work of analyzing the big data of a telecomunication company in Viet Nam.
+                            The purpose of this visualization is to see the change of user data in a period (from June to September 2016).
+                        </p>
+
+                        <p>
+                            The data are collected from various sources (from Oracle database, some log-servers farm, other audit systems,... ) and stored on our Hadoop cluster and analyzed with Spark.
+                        </p>
+
+                        <p>
+                            With a small subset data (like in this demo), I used some python libraries: <i>pandas</i> for reading data, <i>pyplot</i> for plotting, <i>scikit-learn</i> for some ML tasks.
+                            Here I show just the histogram of some common fields (for example: the total amount of charge, the total calling time - in minute, the total number of SMS, ...).
+
+                            The detail info is not explained here.
+
+                            The field name is written in Vietnamese, and the purpose is just a demo!
+                        </p>
+
+                        <br/>
+
+                        <p>Updated 09:25AM 10/25/2016</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/imgzoom.css" />
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.imgzoom.pack.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    var categoryDes = {
+        1: "[0, 20K]",
+        2: "(20K, 50K]",
+        3: "(50K, 100K]",
+        4: "(100K, 200K]",
+        5: "(200K, 300K]",
+        6: "(300K, 500K]",
+        7: "(500K, ~]"
+    }
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $("#btn_dk50").click(function(e){e.preventDefault();$("#content_dk50").toggle();});
+    $("#btn_v79").click(function(e){ e.preventDefault(); $("#content_v79").toggle();});
+
+    $("#btn_dk50_hist").click(function(e){e.preventDefault();$("#content_dk50_hist").toggle();});
+    $("#btn_dk50_boxplot").click(function(e){e.preventDefault();$("#content_dk50_boxplot").toggle();});
+    $("#btn_v79_hist").click(function(e){e.preventDefault();$("#content_v79_hist").toggle();});
+    $("#btn_v79_boxplot").click(function(e){e.preventDefault();$("#content_v79_boxplot").toggle();});
+
+    function tooglePlot(item) {
+        var categoryId = item.id.split('-').pop()
+        $(`#category_content_${categoryId}`).toggle()
+    }
+    function toogleHistogram(item) {
+        var fieldName = item.id.split('-').pop()
+        $(`#histograms_${fieldName}`).toggle()
+    }
+    function toogleBoxPlot(item) {
+        var fieldName = item.id.split('-').pop()
+        $(`#boxplots_${fieldName}`).toggle()
+    }
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    function genImageItem(img_type, month, fieldName, packageName, categoryId, imageBaseDir, haveCaption=true) {
+        var img_ctn = $('<div style="width:25%; height:25%; display:block; float:left;">')
+        if (haveCaption) {
+            $(`<div class="img_caption">${months[month-1]}</div>`).appendTo(img_ctn)
+        }
+        var img = $(`<img onError="this.src='data_not_available.jpg'" id="img_${fieldName}" class='${img_type}_in_row' >`)
+        var img_src = `../${imageBaseDir}/${packageName}/${img_type}_${packageName}_20160${month}01_${categoryId}_${fieldName}.png`
+        var img_zoom = $(`<a href=${img_src}>`)
+        img.attr('src', img_src).appendTo(img_zoom)
+        img_zoom.appendTo(img_ctn)      
+
+        return img_ctn
+    }
+    function genPage(item) {
+        var itemNames = item.id.split('-')
+        var packageName = itemNames[1]
+        var fieldName = itemNames[2]
+        var textName = item.getAttribute('textname')
+        var imageBaseDir = 'imgs_yes'
+
+        $('#data_area').empty()
+
+        $(`<h2 class="data_title">Package ${packageName} -- ${textName} </h2>`).appendTo('#data_area')
+
+        for (categoryId = 1; categoryId <= 7; categoryId ++) {
+            var category_cnt = $(`<div id="category_data_${categoryId}">`)
+            
+            var categoryDescription = categoryDes[categoryId]
+            $(`<h3><a href="javascript:void(0)" id="btn-category-${categoryId}" onclick=tooglePlot(this)>Expense (class ${categoryId}) </a> ${categoryDescription} (VND)</h3>`).appendTo(category_cnt)
+            
+            $(`<label class="show_hide_plot"><input type="checkbox" checked="true" id="btn-histogram-${fieldName}_${categoryId}" onclick=toogleHistogram(this)> Histogram</label>`).appendTo(category_cnt)
+
+            $(`<label class="show_hide_plot"><input type="checkbox" id="btn-boxplot-${fieldName}_${categoryId}" onclick=toogleBoxPlot(this)> Boxplot</label><br><br>`).appendTo(category_cnt)
+
+            category_cnt.appendTo('#data_area')
+
+            var categoryContent = $(`<div id="category_content_${categoryId}">`)
+            var histograms = $(`<div id="histograms_${fieldName}_${categoryId}" class="row_of_images"></div>`)
+            var boxplots = $(`<div id="boxplots_${fieldName}_${categoryId}" class="row_of_images" style="display:none"></div>`)
+
+            for (var month = 6; month <= 9; month++) {
+                histograms.append(genImageItem('hist', month, fieldName, packageName, categoryId, imageBaseDir))
+                boxplots.append(genImageItem('boxplot', month, fieldName, packageName, categoryId, imageBaseDir, false))
+            }
+
+            histograms.appendTo(categoryContent)
+            boxplots.appendTo(categoryContent)
+            categoryContent.appendTo('#data_area')
+        }
+    }
+
+    </script>
+
+    <style type="text/css">
+        #data_area {
+            display: block;
+            float: left;
+        }
+        .row_of_images {
+            display: float;
+        }
+        .boxplot_in_row {
+            width: 96%;
+            height: 240px;
+        }
+        .hist_in_row {
+            width: 96%;
+            height: 240px;
+        }
+        .img_caption {
+            text-align: center;
+            text-decoration-color: blue;
+            font-weight: bold;
+        }
+        .show_hide_plot {
+            display:block;
+            float:right;
+            margin:2px;
+        }
+        .img_item_container {
+            width:25%;
+            display:block;
+            float:left;
+        }
+        .fix_title {
+            color: #eee;
+            background-color: #666;
+        }
+        .hide_default{
+            display: none;
+        }
+        #circle {
+            color: #fff;
+            background: #dde;
+            width: 70px;
+            height: 70px;
+            margin: 7px;
+            border-radius: 50%;
+        }
+    </style>
+
+</body>
+
+</html>
