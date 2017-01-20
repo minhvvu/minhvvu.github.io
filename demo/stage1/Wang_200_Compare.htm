@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Wang Compare</title>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		
+<script type="text/javascript">
+$(document).ready(function() {
+
+    var options1 = {
+        chart: {
+            renderTo: 'container1',
+            type: 'spline'
+        },
+        title: {text: 'VMeasure' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {min: 0, max: 1, title: {text: 'VMeasure'}},
+        series: []
+    };
+
+    var options2 = {
+        chart: {
+            renderTo: 'container2',
+            type: 'column'
+        },
+        title: {text: 'Running time' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},        
+        yAxis: {title: {text: 'Running Time (second)'}},
+        series: []
+    };
+
+    var options3 = {
+        chart: {
+            renderTo: 'container3',
+            type: 'column'
+        },
+        title: {text: 'Number of Iterations' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {title: {text: 'Number of Iterations'}},        
+        series: []
+    };
+
+    var options4 = {
+        chart: {
+            renderTo: 'container4',
+            type: 'column'
+        },
+        title: {text: 'Percent of Constraint Violation' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {title: {text: 'Constraint Violation (%)'}},        
+        series: []
+    };
+
+    function buildDataSeries(jsonLink, serieName) {
+        $.getJSON(jsonLink, function(data) {
+            [].sort.call(data, function(a, b) {return a.nConstraintOriginal - b.nConstraintOriginal});
+            buildVMeasureData(data, serieName);
+            buildCustomDataData(data, serieName, "duration", 0.001, options2);
+            buildCustomDataData(data, serieName, "iterTerminate", 1, options3);
+            buildPercentViolationData(data, serieName)
+            buildChart();
+        });
+    };
+
+    function buildVMeasureData(rawData, serieName) {
+        var dataVMeasure = new Array();
+        var nErrors = 0;
+        $.each(rawData, function(key, dataObj) {
+            if (-1 == dataObj.reachLocalMinimal) { nErrors ++; return; }
+            dataVMeasure.push([dataObj.nConstraintOriginal, dataObj.vMeasure]);
+        });
+        console.log("VMeasure Errors (not reach local minimal)", nErrors);
+        options1.series.push({'data':dataVMeasure, 'name':serieName});
+    }
+
+    function buildPercentViolationData(rawData, serieName) {
+        var durationByGroupKey = {};
+        $.each(rawData, function(key, dataObj) {
+            if (-1 == dataObj.reachLocalMinimal) {return; }
+            var groupKey = Math.floor(dataObj.nConstraintOriginal / 1000);
+            if (!(groupKey in durationByGroupKey)) {
+                durationByGroupKey[groupKey] = [];
+            }
+            durationByGroupKey[groupKey].push(
+                (dataObj.nMLViolation + dataObj.nCLViolation) /
+                (dataObj.nMLStart + dataObj.nCLStart) * 100);
+        });
+
+        var durationData = [];
+        var categoriesName = [];
+        $.each(durationByGroupKey, function(groupKey, durationArr){
+            var total = durationArr.reduce(function(a, b) { return a + b; });
+            var keyName = parseInt(groupKey) * 1000 + " - " + (parseInt(groupKey) + 1) * 1000 ;
+            categoriesName.push(keyName);
+            durationData.push([(total / durationArr.length)]);
+        });
+        console.log(durationData);
+        options4.xAxis.categories = categoriesName;
+        options4.series.push({'data':durationData, 'name':serieName});
+    }
+
+    function buildCustomDataData(rawData, serieName, fileName, customFactor, toChartOptions) {
+        var durationByGroupKey = {};
+        $.each(rawData, function(key, dataObj) {
+            if (-1 == dataObj.reachLocalMinimal) {return; }
+            var groupKey = Math.floor(dataObj.nConstraintOriginal / 1000);
+            if (!(groupKey in durationByGroupKey)) {
+                durationByGroupKey[groupKey] = [];
+            }
+            durationByGroupKey[groupKey].push(dataObj[fileName]);
+        });
+
+        var durationData = [];
+        var categoriesName = [];
+        $.each(durationByGroupKey, function(groupKey, durationArr){
+            var total = durationArr.reduce(function(a, b) { return a + b; });
+            var keyName = parseInt(groupKey) * 1000 + " - " + (parseInt(groupKey) + 1) * 1000 ;
+            categoriesName.push(keyName);
+            durationData.push([(total / durationArr.length * customFactor)]);
+        });
+
+        toChartOptions.xAxis.categories = categoriesName;
+        toChartOptions.series.push({'data':durationData, 'name':serieName});
+    }
+
+    function buildChart () {
+        if (4 == options1.series.length) {
+            var chart1 = new Highcharts.Chart(options1);
+        }
+        if (4 == options2.series.length) {
+            var chart2 = new Highcharts.Chart(options2);
+        }
+        if (4 == options3.series.length) {
+            var chart3 = new Highcharts.Chart(options3);
+        }
+        if (4 == options4.series.length) {
+            var chart4 = new Highcharts.Chart(options4);
+        }
+    }
+
+    buildDataSeries('data/PCKMEANS_NOMETRIC_Wang_200_Result.json', 'PCKMEANS_NOMETRIC');
+    buildDataSeries('data/MPCKMEANS_GLOBAL_DIAGONAL_Wang_200_Result.json', 'MPCKMEANS_GLOBAL_DIAGONAL');
+    buildDataSeries('data/MPCKMEANS_GLOBAL_FULL_Wang_200_Result.json', 'MPCKMEANS_GLOBAL_FULL');
+    buildDataSeries('data/MPCKMEANS_LOCAL_DIAGONAL_Wang_200_Result.json', 'MPCKMEANS_LOCAL_DIAGONAL');
+
+});
+</script>
+
+	</head>
+	<body>
+<script src="highcharts/highcharts.js"></script>
+<script src="highcharts/modules/data.js"></script>
+<script src="highcharts/modules/exporting.js"></script>
+
+<!-- Additional files for the Highslide popup effect -->
+<!-- 
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide-full.min.js"></script>
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/media/com_demo/highslide.css" />
+ -->
+<div>
+    <!-- <span style="text-align:center; color:blue">
+        <h2>Compare PCKMEANS_NOMETRIC, MPCKMEANS_GLOBAL_DIAGONAL, MPCKMEANS_GLOBAL_FULL</h2></span> -->
+    <span style="text-align:center">
+        <h3>Database Wang, 1000 examples, 10 clusters, Codebook size = 200</h3></span>
+    <span style="text-align:center">
+        <h4>(Run 95 experimentations, each experimentation repeats 10 times and get average result)</h4></span>
+</div>
+
+<div id="container1" style="float:left; width: 48%; height: 500px; margin: 0 auto"></div>
+<div id="container3" style="float:right; width: 48%; height: 500px; margin: 0 auto"></div>
+<div id="container2" style="float:left; width: 48%; height: 100%; margin: 0 auto"></div>
+<div id="container4" style="float:right; width: 48%; height: 100%; margin: 0 auto"></div>
+
+	</body>
+</html>

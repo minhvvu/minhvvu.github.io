@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Stage VVMinh - Result Page</title>
+</head><body>
+<h2>Result for DB Wang</h2>
+<!--
+	www.googledrive.com/host/0BzwCgvJqBVkyfkU2UUp0djhXOEtJTHFfUTZ3TDlfTnZCcTlWSE5SdUFDTUNyZzNNdV85U2M
+-->
+<div>
+    <span style="text-align:center; color:blue">
+        <h2>Metric Learning Algorithm - Result Page, update 12/07/2015</h2></span>
+    <span style="text-align:center">
+        <h3>Database Wang, 1000 examples, 10 clusters, Codebook size = 200</h3></span>
+	<span style="text-align:center">
+        <h3>Database Pascal, 3885 examples, 10 clusters, Codebook size = 200</h3></span>        
+</div>
+
+<hr>
+For Wang: Run 95 experimentations, each experimentation repeats 10 times and get average result<br/>
+For Pascal: Run 49 experimentations, each experimentation repeats 5 times and get average result
+</hr>
+
+<hr>
+Using 4 criteria: <br/>
++ VMeasure (0.0 - 1.0) </br>
++ Running Time (second) <br/>
+----	This time is counted for each run of one algo. <br/>
+----	Each run is one EM-loop with maximun 20 itertions <br/>
++ Number of Iterations before terminating <br/>
++ Percent of Constraint Violation (%) <br/>
+</hr>
+
+
+<hr>
+<ul>
+	View all results of 4 implemented algorithms:
+</li><li><a href="Wang_200_Compare.htm">Wang_Compare.htm</a><br/>
+</li><li><a href="Pascal_200_Compare.htm">Pascal_Compare.htm</a><br/><br/>
+	
+	Pairwise Constraint KMeans with No Metric:
+</li><li><a href="Wang_no_metric.htm">Wang_no_metric.htm</a><br/>
+</li><li><a href="Pascal_no_metric.htm">Pascal_no_metric.htm</a><br/><br/>
+
+	Pairwise Constraint KMeans with GLOBAL Metric, Diagonal Covariance Matrix
+</li><li><a href="Wang_global_metric_diagonal.htm">Wang_global_metric_diagonal.htm</a><br/>
+</li><li><a href="Pascal_global_metric_diagonal.htm">Pascal_global_metric_diagonal.htm</a><br/><br/>
+
+	Pairwise Constraint KMeans with GLOBAL Metric, Full Covariance Matrix
+</li><li><a href="Wang_global_metric_full.htm">Wang_global_metric_full.htm</a><br/>
+</li><li><a href="Pascal_global_metric_full.htm">Pascal_global_metric_full.htm</a><br/><br/>
+
+	Pairwise Constraint KMeans with LOCAL Metric, Diagonal Covariance Matrix
+</li><li><a href="Wang_local_metric_diagonal.htm">Wang_local_metric_diagonal.htm</a><br/>
+</li><li><a href="Pascal_local_metric_diagonal.htm">Pascal_local_metric_diagonal.htm (Not completed)</a><br/><br/>
+
+</li></ul>
+<hr>
+
+
+</body></html>

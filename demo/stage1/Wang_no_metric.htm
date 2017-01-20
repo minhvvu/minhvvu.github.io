@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Wang No Metric</title>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    var options1 = {
+        chart: {
+            renderTo: 'container1',
+            type: 'line'
+        },
+        title: {text: 'VMeasure' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {min: 0, max: 1, title: {text: 'VMeasure'}},
+        series: [{
+            name: 'VMeasure',
+            data: []
+        }]
+    };
+
+    var options2 = {
+        chart: {
+            renderTo: 'container2',
+            type: 'column'
+        },
+        title: {text: 'Running time' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {title: {text: 'Running Time (second)'}},
+        series: [{
+            name: 'Running time',
+            data: []
+        }]
+    };
+
+    var options3 = {
+        chart: {
+            renderTo: 'container3',
+            type: 'column'
+        },
+        title: {text: 'Number of Iterations' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {min: 0, max: 20, title: {text: 'Number of Iterations'}},
+        series: [{
+            name: 'Number of Iterations',
+            data: []
+        }]
+    };
+
+    var options4 = {
+        chart: {
+            renderTo: 'container4',
+            type: 'column'
+        },
+        title: {text: 'Percent of Constraint Violation' },
+        subtitle: {text: '(according to the number of constraints)'},
+        xAxis: {title: {text: 'Number of original constraints'}},
+        yAxis: {title: {text: 'Constraint Violation (%)'}},
+        series: [{
+            name: 'Percent of Constraint Violation',
+            data: []
+        }]
+    };
+
+    $.getJSON('data/PCKMEANS_NOMETRIC_Wang_200_Result.json', function(data) {
+        // sort data by the number of constraint used
+        [].sort.call(data, function(a, b) {return a.nConstraintOriginal - b.nConstraintOriginal});
+
+        var data1 = new Array();
+        var data2 = new Array();
+        var data3 = new Array();
+        var data4 = new Array();
+
+        // draw chart, x axe is the number of used original constraints
+        nErrors = 0;
+        $.each(data, function(key, dataObj) {
+            if (-1 == dataObj.reachLocalMinimal) {
+                nErrors ++;
+                return;
+            }
+
+            // avg vMeasure
+            data1.push([dataObj.nConstraintOriginal, dataObj.vMeasure]);
+
+            // avg running time, in second
+            data2.push([dataObj.nConstraintOriginal, dataObj.duration / 1000]);
+
+            // avg number of iteration passed before terminating
+            data3.push([dataObj.nConstraintOriginal, dataObj.iterTerminate]);
+
+            // avg percent of pairwise constraint violation
+            data4.push([dataObj.nConstraintOriginal,
+                (dataObj.nMLViolation + dataObj.nCLViolation) /
+                (dataObj.nMLStart + dataObj.nCLStart) * 100]);
+        });
+        console.log("Errors (not reach local minimal)", nErrors);
+
+        // // sort data by the number of constraint used
+        // var f = function(a, b) {return a[0] - b[0]};
+        // data1.sort(f);
+        // data2.sort(f);
+        // data3.sort(f);
+        // data4.sort(f);
+
+        options1.series[0].data = data1;
+        options2.series[0].data = data2;
+        options3.series[0].data = data3;
+        options4.series[0].data = data4;
+
+        var chart1 = new Highcharts.Chart(options1);
+        var chart2 = new Highcharts.Chart(options2);
+        var chart3 = new Highcharts.Chart(options3);
+        var chart4 = new Highcharts.Chart(options4);
+    });
+
+});
+</script>
+
+	</head>
+	<body>
+<script src="highcharts/highcharts.js"></script>
+<script src="highcharts/modules/data.js"></script>
+<script src="highcharts/modules/exporting.js"></script>
+
+<!-- Additional files for the Highslide popup effect -->
+<!--
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide-full.min.js"></script>
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/media/com_demo/highslide.css" />
+ -->
+<div>
+    <span style="text-align:center; color:blue">
+        <h2>Pairwise Constraint KMeans With No Metric (PCKMEANS_NOMETRIC)</h2></span>
+    <span style="text-align:center">
+        <h3>Database Wang, 1000 examples, 10 clusters, Codebook size = 200</h3></span>
+    <span style="text-align:center">
+        <h4>(Run 95 experimentations, each experimentation repeats 10 times and get average result)</h4></span>
+</div>
+<div id="container1" style="float:left; width: 48%; height: 500px; margin: 0 auto"></div>
+<div id="container3" style="float:right; width: 48%; height: 500px; margin: 0 auto"></div>
+<div id="container2" style="float:left; width: 48%; height: 100%; margin: 0 auto"></div>
+<div id="container4" style="float:right; width: 48%; height: 100%; margin: 0 auto"></div>
+
+	</body>
+</html>
